@@ -1,1 +1,32 @@
+class Solution{
+public:
+    vector<int> findAnagrams(string s , string p){
+        int freq[26] = {0} , zeroes = 26;
 
+        for(char ch : p){
+            if(freq[ch - 'a'] == 0) zeroes--;
+            freq[ch - 'a']--;
+        }
+
+        int n = s.size() , m = p.size();
+
+        vector<int> indices;
+        if(n < m) return indices;
+
+        for(int i = 0 ; i < n ; i++){
+            if(freq[s[i] - 'a'] == 0) zeroes--;
+            freq[s[i] - 'a']++;
+            if(freq[s[i] - 'a'] == 0) zeroes++;
+
+            if(i + 1 >= m){
+                if(zeroes == 26) indices.push_back(i - m + 1);
+
+                if(freq[s[i - m + 1] - 'a'] == 0) zeroes--;
+                freq[s[i - m + 1] - 'a']--;
+                if(freq[s[i - m + 1] - 'a'] == 0) zeroes++;
+            }
+        }
+
+        return indices;
+    }
+};
