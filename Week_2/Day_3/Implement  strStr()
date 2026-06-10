@@ -1,1 +1,26 @@
+class Solution {
+public:
+    int strStr(string haystack, string needle) {
+         if(needle.size()>haystack.size()){
+            return -1;
+         }
+         int num = needle.size();
+         int check = haystack.size();
 
+for(int i = 0; i < check - num +2 ; i++){
+
+int count = 0;
+         for(int j = i; j < num+i; j++){
+          
+           if(needle[j-i]==haystack[j]){
+              count++;
+              if(count == num){
+                return j - num +1;
+              }
+           }
+                    
+         }
+    }
+    return -1;
+    }
+};
